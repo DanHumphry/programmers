@@ -1260,6 +1260,80 @@
       // }
 
 
+      //가장 큰 수
+      // let arg = [3, 30, 34, 5, 9];
+      //버블정렬
+      // function solution(numbers) {
+      //   if (numbers.filter((v)=>v>0).length === 0) return '0';
+      //   numbers = numbers.map((v)=>v+'');
+      //   for (let i = 0; i < numbers.length; i++) {
+      //     for (let j = 0; j < numbers.length - 1 - i; j++) {
+      //       if (numbers[j] + numbers[j+1] < numbers[j+1] + numbers[j])
+      //         [numbers[j], numbers[j+1]] = [numbers[j+1], numbers[j]];
+      //     }
+      //   }
+      //   return numbers.join('');
+      // }
+
+      //삽입정렬
+      // function solution (numbers) {
+      //   if (numbers.filter((v)=>v>0).length === 0) return '0';
+      //   numbers = numbers.map((v)=>v+'');
+      //   for (let i = 1; i < numbers.length; i++) {
+      //     let cur = numbers[i];
+      //     let left = i - 1;
+      //     while (left >= 0 && numbers[left] + cur < cur + numbers[left]) {
+      //       numbers[left + 1] = numbers[left];
+      //       left--;
+      //     }
+      //     numbers[left + 1] = cur;
+      //   }
+      //   return numbers.join('');
+      // }
+
+      // 선택정렬
+      // function solution (numbers) {
+      //   if (numbers.filter((v)=>v>0).length === 0) return '0';
+      //   numbers = numbers.map((v)=>v+'');
+      //   for (let i = 0; i < numbers.length; i++) {
+      //     let minIndex = i;
+      //     for (let j = i + 1; j < numbers.length; j++) {
+      //       if (numbers[minIndex] + numbers[j] < numbers[j] + numbers[minIndex])
+      //         minIndex = j;
+      //     }
+      //     if (minIndex !== i)
+      //       [numbers[minIndex], numbers[i]] = [numbers[i], numbers[minIndex]];
+      //   }
+      //   return numbers.join('');
+      // }
+
+      //퀵정렬 .. 테스트케이스는 실패라고 뜨나 반례를 찾을 수 없을 정도로 꽤나 합리적인 코드라고 생각..
+      // function solution (numbers) {
+      //   if (numbers.filter((v)=>v>0).length === 0) return '0';
+      //   const quickSort = (arr) =>{
+      //     if (arr.length < 2) return arr;
+      //
+      //     const pivot = [arr[0]];
+      //     const left = [];
+      //     const right = [];
+      //     for (let i = 1; i < arr.length; i++) {
+      //       if (arr[i] + pivot > pivot + arr[i]) left.push(arr[i]);
+      //       else if (arr[i] + pivot < pivot + arr[i]) right.push(arr[i]);
+      //       else pivot.push(arr[i]);
+      //     }
+      //     return quickSort(left).concat(pivot, quickSort(right));
+      //   }
+      //   return quickSort(numbers.map((v)=>v+'')).join('')
+      // }
+
+      // //sort함수
+      // function solution(numbers){
+      //   if (numbers.filter((v)=>v>0).length === 0) return '0';
+      //   return numbers.map((v)=>v+'').sort((a, b)=>{
+      //     if (a+b > b+a) return (b+a) - (a+b);
+      //   }).join('');
+      // }
+
 
       console.log(solution(arg));
     </script>
