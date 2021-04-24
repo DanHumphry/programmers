@@ -1335,6 +1335,27 @@
       // }
 
 
+      // //H-Index
+      // const arg = [2, 2];
+      // function solution(citations) {
+      //   if (citations.filter((v)=> v>0).length === 0) return 0;
+      //   citations = citations.sort((a, b) => a-b);
+      //   let j = 0;
+      //   let standard = citations.length;
+      //   while(j <= citations.length){
+      //     for(let i = 0; i < citations.length; i++){
+      //       if (citations[i] >= j){
+      //         standard = i;
+      //         break;
+      //       }
+      //     }
+      //     if (standard > j || citations.length - standard < j) break;
+      //     j++;
+      //   }
+      //   return j-1;
+      // }
+
+
       console.log(solution(arg));
     </script>
 
