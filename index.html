@@ -1355,18 +1355,85 @@
       //   return j-1;
       // }
 
-      // //메뉴 리뉴얼
-      // let arg = ["ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"];
-      // let arg2 = [2, 3, 5];
-      // // result = 	["ACD", "AD", "ADE", "CD", "XYZ"]
-      // //["AB", "ABCDE", "ACD", "ADE", "CD", "XYZ", "XYZ"]
-      // function solution(orders, course) {
+
+      //카카오 인턴쉽 1번
+      // let arg = 'one4seveneight'
+      // function solution(s) {
+      //   const sArr = s.split("");
+      //   const en = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+      //   let temp = 0;
+      //   en.forEach((item, index)=>{
+      //     while(true){
+      //       let foundEn = s.indexOf(item, temp);
+      //       if (foundEn === -1) break;
       //
+      //       sArr.splice(foundEn, item.length, index);
+      //       s = sArr.join("");
+      //       temp = foundEn + 1;
+      //     }
+      //     temp = 0;
+      //   })
+      //   return +s;
       // }
 
 
+      //카카오 인턴쉽 2번
+      let arg =
+              [["PXPOX", "XPXOX", "PXPXX", "OOXOX", "XOXXX"],
+                ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"],
+                ["PXOPX", "OXOXP", "OXPXX", "OXXXP", "POOXX"],
+                ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"],
+                ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]];
 
-      // console.log(solution(arg, arg2));
+      //No.	0	1	2	3	4
+      // 0	P	X	P	O	X
+      // 1	X	P	X	O	X
+      // 2	P	X	P	X	X
+      // 3	O	O	X	O	X
+      // 4	X	O	X	X	X
+      //result = [1, 0, 1, 1, 1]
+      //P 는 응시자가 앉아있는 자리를 의미합니다.
+      //O 는 빈 테이블을 의미합니다.
+      //X 는 파티션을 의미합니다.
+      function solution(places){
+        return places.map((item)=>{
+          let res = true;
+          let person = [];
+          item.forEach((it, x)=>{
+            for (let y = 0; y < 5; y++)
+              if (it[y] === "P") person.push([x,y]);
+          })
+          person.forEach((lc, idx, arr)=>{
+            for (let i = 1; i + idx < person.length; i++){
+              if (Math.abs(lc[0] - arr[idx+i][0]) + Math.abs(lc[1] - arr[idx+i][1]) === 2) {
+                if (lc[0] === arr[idx+i][0]){ //같은 행
+                  if (item[lc[0]][lc[1]+1] !== "X") res = false;
+                }
+                else if(lc[1] === arr[idx+i][1]) { //같은 열
+                  if (item[lc[0]+1][lc[1]] !== "X") res = false;
+                }
+                else if(Math.abs(lc[0] - arr[idx+i][0]) === 1 && Math.abs(lc[1] - arr[idx+i][1]) === 1) { // 대각선
+                  if (lc[1] < arr[idx+1][1]){ //왼쪽에서 오른쪽아래
+                    if (item[lc[0]][lc[1] + 1] !== "X" || item[arr[idx + i][0]][arr[idx + i][1] - 1] !== "X") {
+                      res = false;
+                    }
+                  }else { // 오른쪽에서 왼쪽아래
+                    if (item[lc[0]][lc[1] - 1] !== "X" || item[arr[idx + i][0]][arr[idx + i][1] + 1] !== "X") {
+                      res = false;
+                    }
+                  }
+                  continue;
+                }
+              } else if (Math.abs(lc[0] - arr[idx+i][0]) + Math.abs(lc[1] - arr[idx+i][1]) < 2) res = false;
+            }
+          });
+
+          if (res) return 1;
+          else return 0;
+        })
+      }
+
+      console.log(solution(arg));
     </script>
 
     <script>
