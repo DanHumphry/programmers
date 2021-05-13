@@ -1377,13 +1377,13 @@
       // }
 
 
-      //카카오 인턴쉽 2번
-      let arg =
-              [["PXPOX", "XPXOX", "PXPXX", "OOXOX", "XOXXX"],
-                ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"],
-                ["PXOPX", "OXOXP", "OXPXX", "OXXXP", "POOXX"],
-                ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"],
-                ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]];
+      //카카오 인턴쉽 2번 -> 테스트케이스 하나 통과못했음
+      // let arg =
+      //         [["PXPOX", "XPXOX", "PXPXX", "OOXOX", "XOXXX"],
+      //           ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"],
+      //           ["PXOPX", "OXOXP", "OXPXX", "OXXXP", "POOXX"],
+      //           ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"],
+      //           ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]];
 
       //No.	0	1	2	3	4
       // 0	P	X	P	O	X
@@ -1395,43 +1395,100 @@
       //P 는 응시자가 앉아있는 자리를 의미합니다.
       //O 는 빈 테이블을 의미합니다.
       //X 는 파티션을 의미합니다.
-      function solution(places){
-        return places.map((item)=>{
-          let res = true;
-          let person = [];
-          item.forEach((it, x)=>{
-            for (let y = 0; y < 5; y++)
-              if (it[y] === "P") person.push([x,y]);
-          })
-          person.forEach((lc, idx, arr)=>{
-            for (let i = 1; i + idx < person.length; i++){
-              if (Math.abs(lc[0] - arr[idx+i][0]) + Math.abs(lc[1] - arr[idx+i][1]) === 2) {
-                if (lc[0] === arr[idx+i][0]){ //같은 행
-                  if (item[lc[0]][lc[1]+1] !== "X") res = false;
-                }
-                else if(lc[1] === arr[idx+i][1]) { //같은 열
-                  if (item[lc[0]+1][lc[1]] !== "X") res = false;
-                }
-                else if(Math.abs(lc[0] - arr[idx+i][0]) === 1 && Math.abs(lc[1] - arr[idx+i][1]) === 1) { // 대각선
-                  if (lc[1] < arr[idx+1][1]){ //왼쪽에서 오른쪽아래
-                    if (item[lc[0]][lc[1] + 1] !== "X" || item[arr[idx + i][0]][arr[idx + i][1] - 1] !== "X") {
-                      res = false;
-                    }
-                  }else { // 오른쪽에서 왼쪽아래
-                    if (item[lc[0]][lc[1] - 1] !== "X" || item[arr[idx + i][0]][arr[idx + i][1] + 1] !== "X") {
-                      res = false;
-                    }
-                  }
-                  continue;
-                }
-              } else if (Math.abs(lc[0] - arr[idx+i][0]) + Math.abs(lc[1] - arr[idx+i][1]) < 2) res = false;
-            }
-          });
+      // function solution(places){
+      //   return places.map((item)=>{
+      //     let res = true;
+      //     let person = [];
+      //     item.forEach((it, x)=>{
+      //       for (let y = 0; y < 5; y++)
+      //         if (it[y] === "P") person.push([x,y]);
+      //     })
+      //     person.forEach((lc, idx, arr)=>{
+      //       for (let i = 1; i + idx < person.length; i++){
+      //         if (Math.abs(lc[0] - arr[idx+i][0]) + Math.abs(lc[1] - arr[idx+i][1]) === 2) {
+      //           if (lc[0] === arr[idx+i][0]){ //같은 행
+      //             if (item[lc[0]][lc[1]+1] !== "X") res = false;
+      //           }
+      //           else if(lc[1] === arr[idx+i][1]) { //같은 열
+      //             if (item[lc[0]+1][lc[1]] !== "X") res = false;
+      //           }
+      //           else if(Math.abs(lc[0] - arr[idx+i][0]) === 1 && Math.abs(lc[1] - arr[idx+i][1]) === 1) { // 대각선
+      //             if (lc[1] < arr[idx+1][1]){ //왼쪽에서 오른쪽아래
+      //               if (item[lc[0]][lc[1] + 1] !== "X" || item[arr[idx + i][0]][arr[idx + i][1] - 1] !== "X") {
+      //                 res = false;
+      //               }
+      //             }else { // 오른쪽에서 왼쪽아래
+      //               if (item[lc[0]][lc[1] - 1] !== "X" || item[arr[idx + i][0]][arr[idx + i][1] + 1] !== "X") {
+      //                 res = false;
+      //               }
+      //             }
+      //             continue;
+      //           }
+      //         } else if (Math.abs(lc[0] - arr[idx+i][0]) + Math.abs(lc[1] - arr[idx+i][1]) < 2) res = false;
+      //       }
+      //     });
+      //
+      //     if (res) return 1;
+      //     else return 0;
+      //   })
+      // }
 
-          if (res) return 1;
-          else return 0;
-        })
-      }
+
+      //월코챌 21년 05월 1번
+      // let arg = 13;
+      // let arg2 = 17;
+      // function solution(left, right) {
+      //   let answer = 0;
+      //   for (let i = left; i <= right; i++) {
+      //     const result = [];
+      //     for (let l = 1; l <= i; l++) {
+      //       i % l === 0 ? result.push(l) : null
+      //     }
+      //     result.length % 2 === 0 ? answer += i : answer -= i;
+      //   }
+      //   return answer;
+      // }
+
+
+      //월코챌 21년 05월 2번
+      // const arg = [7, 15, 0];
+      //왜 런타임에러걸리는지 모르겠는 재귀
+      // function solution(numbers) {
+      //   const temp = (num, n) => {
+      //     const beta = (num ^ n).toString(2);
+      //     let cnt = 0;
+      //     for (let l = 0; l < beta.length; l++) beta[l] === "1" ? cnt++ : null;
+      //     if (cnt > 2) return temp(num, ++n);
+      //     else return n;
+      //   }
+      //
+      //   return numbers.map((num) => {
+      //     return temp(num, num+1);
+      //   })
+      // }
+
+      //while문인데 끝에 케이스2개만 실패.. 도저히 예외못찾겠음
+      // function solution(numbers) {
+      //   return numbers.map((num) => {
+      //     let i = num + 1;
+      //     while (true) {
+      //       let cnt = 0;
+      //       const beta = (num ^ i).toString(2);
+      //       for (let l = 0; l < beta.length; l++){
+      //         if (beta[l] === "1") cnt++;
+      //         else continue;
+      //         if (cnt > 2) break;
+      //       }
+      //       if (cnt <= 2) break;
+      //       else i++;
+      //     }
+      //     return i;
+      //   })
+      // }
+
+
+
+
 
       console.log(solution(arg));
     </script>
