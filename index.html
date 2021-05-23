@@ -1487,7 +1487,41 @@
       // }
 
 
+      // // 로또의 최고 순위와 최저 순위
+      // const arg = [44, 1, 0, 0, 31, 25];
+      // const arg2 = [31, 10, 45, 1, 6, 19];
+      // function solution(lottos, win_nums) {
+      //   const zeroCnt = lottos.filter((item)=>item===0).length | 0;
+      //   let sameNumCnt = 0;
+      //   lottos.forEach((num)=>win_nums.indexOf(num) !== -1 ? sameNumCnt++ : null)
+      //   const ranking = [6, 6, 5, 4, 3, 2, 1];
+      //   let best = ranking[sameNumCnt] - zeroCnt;
+      //   let worst = ranking[sameNumCnt];
+      //   best < 1 ? best = 1 : null;
+      //   return [best, worst];
+      // }
 
+
+      //짝지어 제거하기
+      const arg = 'baabaa';
+      function solution(s) {
+        const rec = (S)=>{
+          if (S.length === 0) return 1;
+
+
+          const cp = S;
+          for(let i = 0; i < cp.length; i++){
+            const re = new RegExp(`${S[i]}{2,}`,"g");
+            if(re.test(S)){
+              S = S.replace(re, S[i] + S[i]);
+              return rec(S);
+            }
+          }
+
+          if (cp.length === S.length) return 0;
+        }
+        return rec(s);
+      }
 
 
       console.log(solution(arg));
