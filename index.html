@@ -1503,24 +1503,16 @@
 
 
       //짝지어 제거하기
-      const arg = 'baabaa';
+      const arg = 'baabaaa';
       function solution(s) {
-        const rec = (S)=>{
-          if (S.length === 0) return 1;
+        const stack = [];
 
-
-          const cp = S;
-          for(let i = 0; i < cp.length; i++){
-            const re = new RegExp(`${S[i]}{2,}`,"g");
-            if(re.test(S)){
-              S = S.replace(re, S[i] + S[i]);
-              return rec(S);
-            }
-          }
-
-          if (cp.length === S.length) return 0;
+        for(let i = 0 ; i < s.length ; i++ ){
+          if( !stack.length || stack[stack.length-1] !== s[i] ) stack.push(s[i]);
+          else stack.pop();
         }
-        return rec(s);
+
+        return stack.length ? 0 : 1;
       }
 
 
