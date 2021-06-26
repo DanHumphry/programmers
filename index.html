@@ -1502,21 +1502,132 @@
       // }
 
 
-      //짝지어 제거하기
-      const arg = 'baabaaa';
-      function solution(s) {
-        const stack = [];
+      // //짝지어 제거하기
+      // const arg = 'baabaaa';
+      // function solution(s) {
+      //   const stack = [];
+      //
+      //   for(let i = 0 ; i < s.length ; i++ ){
+      //     if( !stack.length || stack[stack.length-1] !== s[i] ) stack.push(s[i]);
+      //     else stack.pop();
+      //   }
+      //
+      //   return stack.length ? 0 : 1;
+      // }
 
-        for(let i = 0 ; i < s.length ; i++ ){
-          if( !stack.length || stack[stack.length-1] !== s[i] ) stack.push(s[i]);
-          else stack.pop();
+      //타겟 넘버
+      const arg = [1,2,3,4,5];
+      const arg2 = 3;
+      // function solution(numbers, target) {
+      //   let answer = 0;
+      //
+      //   function combination(arr, selectNum, startIdx) {
+      //     let fixed = 0;
+      //     if (selectNum === 1) return arr.reduce((a, b) => a + b);
+      //     arr.forEach((v, idx, arr) => {
+      //       if (idx >= startIdx) {
+      //         fixed ? fixed = v : fixed += v;
+      //         const restArr = arr.filter((_,index)=>idx !== index);
+      //         const restSum = combination(restArr, selectNum - 1, startIdx);
+      //         if (restSum - fixed === target) answer++;
+      //         else if(restSum && fixed - restSum === target) answer++;
+      //         startIdx++;
+      //       }
+      //     });
+      //   }
+      //
+      //   if (numbers.reduce((a,b)=>a+b) !== target) {
+      //     for(let i = 2; i <= numbers.length; i++) combination(numbers, i, 0);
+      //     return answer;
+      //   } else return 1;
+      // }
+
+      function solution(numbers, target) {
+        let answer = 0;
+        const DFS1 = (arr, cnt) => {
+          if (arr.length === 0) return;
+
+          let sum = arr.reduce((a,b)=>a+b);
+          if (cnt !== 0) for(let i = 0; i < cnt; i++) sum -= numbers[i];
+
+          arr.forEach((item)=> {
+            console.log(arr, sum, sum - item*2);
+
+            (sum - item * 2) === target ? answer++ : null
+          })
+
+
+          DFS1(arr.slice(1, arr.length), ++cnt)
         }
 
-        return stack.length ? 0 : 1;
+        const DFS2 = (arr, cnt) => {
+          if (arr.length === 0) return;
+
+          let sum = -arr.reduce((a,b)=>a+b);
+          console.log(sum);
+          for (let i = numbers.length-1; i >= cnt; i--){
+            sum = sum + (numbers[cnt]*2);
+          }
+          console.log(sum);
+
+          arr.forEach((item)=> {
+            console.log(arr, sum, sum + item*2);
+
+            (sum + item * 2) === target ? answer++ : null
+          })
+
+          arr.pop();
+          DFS2(arr, --cnt)
+        }
+
+        DFS1(numbers, 0);
+        DFS2(numbers, 4)
+
+        return answer;
       }
 
+      // function solution(numbers, target) {
+      //   let answer = 0;
+      //
+      //   function subset(cnt,sum){
+      //     console.log(cnt, sum);
+      //     if(cnt===numbers.length){
+      //       if(sum===target){
+      //         answer+=1;
+      //       }
+      //       return;
+      //     }
+      //     subset(cnt+1,sum+numbers[cnt]);
+      //     subset(cnt+1,sum-numbers[cnt]);
+      //   }
+      //   subset(0,0);
+      //   return answer;
+      // }
 
-      console.log(solution(arg));
+
+      // // 카펫
+      // const arg = 24;
+      // const arg2 = 24;
+      // function solution(brown, yellow) {
+      //   const DFS = (w, h, cnt, arr) => {
+      //     const width = (w + 2) * 2;
+      //     const height = h * 2;
+      //
+      //     if (width + height === brown) return [w+2, h+2];
+      //     else return DFS(arr[arr.length - ++cnt], arr[cnt-1], cnt, arr)
+      //   }
+      //
+      //   function divisors(integer) {
+      //     const arr = [1];
+      //     for(let i = 2; i <= integer; i++) if(integer % i == 0) arr.push(i);
+      //     return arr;
+      //   }
+      //
+      //   return DFS(yellow, 1, 1, divisors(yellow));
+      // }
+
+
+      console.log(solution(arg, arg2));
     </script>
 
     <script>
