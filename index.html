@@ -1593,7 +1593,39 @@
       // }
 
 
-      console.log(solution(arg, arg2));
+      // 숫자 문자열과 영단어
+      const arg = "one4seveneight";
+      // function solution(s){
+      //   const arr = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+      //   let temp = '';
+      //   let res = ''
+      //
+      //   s.split("").forEach((str)=>{
+      //     const rex = /[a-z]/;
+      //     if (rex.test(str)) temp += str;
+      //     else res += str;
+      //
+      //     if (arr.indexOf(temp) !== -1) {
+      //       res += `${arr.indexOf(temp)}`;
+      //       temp = '';
+      //     }
+      //   })
+      //   return +res;
+      // }
+      function solution(s) {
+        const arr = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+
+        for (let i = 0; i < 10; i++) {
+          const regexp = new RegExp(arr[i], "gi");
+          s = s.replace(regexp, i);
+        }
+        return +s;
+      }
+
+
+
+
+      console.log(solution(arg));
     </script>
 
     <script>
